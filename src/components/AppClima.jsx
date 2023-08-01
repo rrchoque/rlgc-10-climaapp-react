@@ -5,15 +5,17 @@ import Resultado from "./Resultado"
 
 const AppClima = () => {
 
-  const { resultado,cargando } = useClima()
+  const { resultado,cargando,noResultado } = useClima()
 
   return (
     <>
         <main className="dos-columnas">
             <Formulario />
             { 
-              cargando ? <Loading /> : 
-              resultado?.name && <Resultado />
+              cargando ? <Loading /> :
+              noResultado ? <p>{noResultado}</p>:
+              resultado?.name ? <Resultado /> :
+              <p>El clima se va a mostrar aquí</p>
             }
         </main>
     </>
