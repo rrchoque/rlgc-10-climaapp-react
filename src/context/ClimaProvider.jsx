@@ -10,6 +10,7 @@ const ClimaProvider = ({children}) => {
         pais: ''
     })
     const [resultado, setResultado] = useState({})
+    const [cargando, setCargando] = useState(false)
 
     const datosBusqueda = e => {
         setBusqueda({
@@ -19,6 +20,7 @@ const ClimaProvider = ({children}) => {
     }
 
     const consultarClima = async datos => {
+        setCargando(true)
 
         try {
             const { ciudad, pais } = datos
@@ -37,6 +39,8 @@ const ClimaProvider = ({children}) => {
 
         } catch (error) {
             console.log(error)
+        } finally {
+            setCargando(false)
         }
 
     }
@@ -47,7 +51,8 @@ const ClimaProvider = ({children}) => {
                 busqueda,
                 datosBusqueda,
                 consultarClima,
-                resultado
+                resultado,
+                cargando
             }}
         >
             {children}
